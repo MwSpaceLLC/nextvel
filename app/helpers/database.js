@@ -2,7 +2,7 @@ const {PrismaClient} = require('@prisma/client')
 
 const env = process.env.NODE_ENV || 'development';
 
-export const prisma = global.prisma || new PrismaClient(env !== '' ? {
+export let prisma = global.prisma || new PrismaClient(env !== '' ? {
     log: [
         // 'query',
         // 'info',

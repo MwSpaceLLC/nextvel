@@ -1,22 +1,24 @@
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {session} from "../../helpers/session";
+import {createSessionId, withSession} from "../../helpers/session";
 import {prisma} from "../../helpers/database";
+import app from "../../../config/app";
 
-export const getServerSideProps = session(
+export const getServerSideProps = withSession(
     async function getServerSideProps({query, req, locale}) {
+
+        await createSessionId(req.session);
 
         // check with sql query auth && backend token
         if (
-            process.env.ADMIN_BACKEND_TOKEN !== query.token &&
-            await prisma.admin.findUnique({where: {id: req.session?.user?.id || 0}})
+            app.token !== query.token ||
+            await prisma.admin.findUnique({where: {id: req.session?.admin?.id || 0}})
         ) return {
-            redirect: {
-                notFound: true //TODO: make stuff
-            }
+            notFound: true //TODO: make stuff
         }
 
         return {
             props: {
+                token: query.token,
                 ...(await serverSideTranslations(locale, ['common'])),
             },
         };

@@ -1,10 +1,11 @@
 import {Fragment, useEffect, useRef, useState} from 'react'
 
+import axios from "axios";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
+import useApi from "../../../resources/hooks/useApi";
 
-import Link from "next/link";
-import axios from "axios";
+import ErrorsAlert from "../../../resources/components/layout/ErrorsAlert";
 
 /**
  |--------------------------------------------------------------------------
@@ -12,79 +13,64 @@ import axios from "axios";
  |----------------------------------------------------------------------- */
 
 // This is middleware for index
-export {getServerSideProps} from "../../../app/http/middleware/GuestServerSideProps"
+export {getServerSideProps} from "../../../app/http/middleware/AdminGuestServerSideProps"
 
 /**
  |--------------------------------------------------------------------------
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function AdminLogin() {
-    const {t} = useTranslation();
+export default function AdminLogin({token}) {
+
+    const api = useApi();
     const router = useRouter()
+    const {t} = useTranslation();
 
-    const email = useRef();
-    const password = useRef();
-
-    const [loader, setLoader] = useState(false);
+    const [load, setLoad] = useState(false);
     const [res, setRes] = useState({});
 
-    const AuthPost = (evt) => {
-        setLoader(true)
+    /**
+     *
+     * @param evt
+     * @param credentials
+     * @constructor
+     */
+    const Submit = (evt, credentials = {}) => {
 
-        evt.preventDefault()
+        setLoad(true)
+        evt.preventDefault();
 
-        const credentials = {
-            email: email.current.value,
-            password: password.current.value
-        };
+        evt.target.querySelectorAll('input').forEach(item => Object.assign(credentials, {[item.name]: item.value}))
 
-        axios.post(`/api/${window.location.pathname}`, credentials)
-            .then(() => router.push(window.location.pathname))
+        axios.post(api, credentials)
+            .then(e => router.push(window.location.pathname.replace('login', '')))
+            .catch(({response}) => setRes(response))
+            .finally(() => setLoad(false))
+
     }
-
-    useEffect(() => {
-        document.querySelector("html").classList.add("h-full", "bg-gray-100")
-        document.querySelector("body").classList.add("h-full")
-    });
 
     return (
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+
+            <img src="/beams-components.png" className="fixed z-0" alt="bg"/>
+
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-
-                <h2 className="mt-6 flex items-center gap-2 text-center justify-center text-3xl font-extrabold text-gray-900">
-                    <Link href="/">
-                        <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                      d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/>
-                            </svg>
-                        </a>
-                    </Link>
-
-                    Login to your account
-                </h2>
+                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Accesso spazio admin</h2>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <form className="space-y-6" onSubmit={AuthPost} method="POST">
+            <div className="relative z-10 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="py-8 px-4 sm:rounded-lg sm:px-10">
+                    <form onSubmit={Submit} className="space-y-6" method="post">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                e-mail address
+                                Indirizzo e-mail
                             </label>
                             <div className="mt-1">
                                 <input
-                                    ref={email}
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
                                     required
-                                    disabled={loader}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    type="email"
+                                    name="email"
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-app focus:border-app sm:text-sm"
                                 />
                             </div>
                         </div>
@@ -95,45 +81,20 @@ export default function AdminLogin() {
                             </label>
                             <div className="mt-1">
                                 <input
-                                    ref={password}
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    disabled={loader}
-                                    autoComplete="current-password"
                                     required
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    type="password"
+                                    name="password"
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-app focus:border-app sm:text-sm"
                                 />
-                            </div>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    disabled={loader}
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded-full"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
-                                </label>
-                            </div>
-
-                            <div className="text-sm">
-                                <a href="#" className="font-medium text-gray-600 hover:text-gray-500">
-                                    Forgot your password?
-                                </a>
                             </div>
                         </div>
 
                         <div>
                             <button
-                                disabled={loader}
                                 type="submit"
-                                className={(loader ? 'animate-pulse' : '') + " w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"}>
-                                {loader ? '⚪⚪⚪' : 'Sign in'}
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-app hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-app"
+                            >
+                                {load ? '⚪⚪⚪' : 'Accedi'}
                             </button>
                         </div>
                     </form>
@@ -141,7 +102,8 @@ export default function AdminLogin() {
                 </div>
             </div>
 
-            {!res.status ? '' : <ErrorsAlert onClose={e => setRes({})} res={res}/>}
+            <ErrorsAlert res={res} setRes={setRes}/>
+
         </div>
     )
 }

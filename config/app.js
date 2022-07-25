@@ -1,6 +1,4 @@
-require('dotenv').config()
-
-export default {
+module.exports = {
 
     /*
     |--------------------------------------------------------------------------
@@ -17,16 +15,16 @@ export default {
 
     /*
     |--------------------------------------------------------------------------
-    | Application Admin Path
+    | Application Admin token
     |--------------------------------------------------------------------------
     |
     | This value is the name of your application. This value is used when the
-    | framework needs to place the application's admin path in any location as
+    | framework needs to place the application's token path in any location as
     | required by the application or its packages.
     |
     */
 
-    adminpath: '/admin',
+    token: process.env.COOKIES_PASSWORD?.toLowerCase(),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,6 +64,6 @@ export default {
     |
     */
 
-    salt: process.env.COOKIES_PASSWORD?.length || 10,
+    salt: 10,
 
 }

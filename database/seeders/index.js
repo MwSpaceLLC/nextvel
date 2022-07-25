@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const crypto = require('crypto');
 
 const {PrismaClient} = require('@prisma/client')
+const app = require("../../config/app");
 
 const prisma = new PrismaClient({log: ['query']});
 
@@ -28,7 +29,7 @@ const prisma = new PrismaClient({log: ['query']});
                 role: 'root',
                 name: 'Nextvel',
                 email: 'info@nextvel.com',
-                password: bcrypt.hashSync(process.env.COOKIES_PASSWORD, 10),
+                password: bcrypt.hashSync(process.env.COOKIES_PASSWORD, app.salt),
             }
         })
     )

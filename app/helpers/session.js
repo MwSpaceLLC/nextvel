@@ -1,6 +1,5 @@
 import {withIronSessionApiRoute, withIronSessionSsr} from "iron-session/next";
 import crypto from "crypto";
-import {prisma} from "./database";
 
 const sessionOptions = {
     cookieName: process.env.NEXT_PUBLIC_APP_NAME,
@@ -12,10 +11,19 @@ const sessionOptions = {
     },
 };
 
+export async function createSessionId(session) {
+    if (!session.id) {
+        session.id = crypto.randomUUID();
+        await session.save();
+    }
+
+    return session.id;
+}
+
 export function withApiSession(handler) {
     return withIronSessionApiRoute(handler, sessionOptions);
 }
 
-export function session(handler) {
+export function withSession(handler) {
     return withIronSessionSsr(handler, sessionOptions);
 }
