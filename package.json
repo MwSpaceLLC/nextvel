@@ -2,7 +2,7 @@
   "name": "nextvel",
   "version": "2.0.0",
   "license": "Apache-2.0",
-  "description": "Small starter app with nextjs | Authentication, Session, Email, Translation & Database",
+  "description": "Small starter app with nextjs | Authentication, Seeders, Session, Email, Translation & Database",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
