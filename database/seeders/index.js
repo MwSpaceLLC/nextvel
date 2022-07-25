@@ -29,7 +29,7 @@ const prisma = new PrismaClient({log: ['query']});
                 role: 'root',
                 name: 'Nextvel',
                 email: 'info@nextvel.com',
-                password: bcrypt.hashSync(process.env.COOKIES_PASSWORD, app.salt),
+                password: bcrypt.hashSync('nextvel', app.salt),
             }
         })
     )

@@ -1,13 +1,12 @@
-require('dotenv').config()
-
+const ReactDOMServer = require('react-dom/server');
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
     port: process.env.MAIL_PORT,
     host: process.env.MAIL_HOST,
     auth: {
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD,
+        user: process.env.MAIL_USERNAME || 'mailhog',
+        pass: process.env.MAIL_PASSWORD || 'mailhog',
     },
     secure: process.env.MAIL_SECURE.toLowerCase() === 'true',
     tls: {rejectUnauthorized: false}
@@ -16,7 +15,7 @@ const transporter = nodemailer.createTransport({
 export default function nodemail(to, subject, html, callback) {
 
     return transporter.sendMail({
-            from: `wogha <${process.env.MAIL_FROM_ADDRESS}>`,
+            from: `${process.env.MAIL_FROM_NAME} <${process.env.MAIL_FROM_ADDRESS}>`,
             to: to,
             subject: subject,
             text: html.replace(/<[^>]*>?/gm, ' '),
@@ -52,4 +51,27 @@ export default function nodemail(to, subject, html, callback) {
         },
         callback
     )
+}
+
+export class Mail {
+
+    _to;
+    _subject;
+
+    static to(to, subject) {
+        const self = new Mail;
+        self._to = to;
+        self._subject = subject
+        return self;
+    }
+
+    send(Component, callback, error) {
+        const html = ReactDOMServer.renderToString(Component);
+
+        nodemail(this._to, this._subject, html, async function (err, info) {
+
+            if (err) throw new Error(err)
+            return callback(info);
+        })
+    }
 }

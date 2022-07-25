@@ -1,6 +1,6 @@
-import BodyEmail from "../components/BodyEmail";
+import BodyEmail from "../../components/email/BodyEmail";
 
-export default function ConfirmCodeMail({email, random}) {
+export default function AuthenticateMail({email}) {
     return (
         <BodyEmail>
             <tr>
@@ -21,7 +21,7 @@ export default function ConfirmCodeMail({email, random}) {
                         fontWeight: 'bold',
                         marginTop: 0,
                         textAlign: 'left'
-                    }}>Codice per: {email}</h1>
+                    }}>Accesso rilevato</h1>
 
                     <p style={{
                         boxSizing: 'border-box',
@@ -32,7 +32,7 @@ export default function ConfirmCodeMail({email, random}) {
                         marginTop: 0,
                         textAlign: 'left'
                     }}>
-                        Ecco il tuo codice di conferma: <i>{random}</i>
+                        Abbiamo rilevato un accesso al tuo account <i>{email}</i>
                     </p>
 
                 </td>
