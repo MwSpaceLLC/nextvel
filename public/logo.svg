@@ -1,0 +1,41 @@
+<svg class="h-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 238.39 145.17">
+    <defs>
+        <linearGradient id="linear-gradient-l" x1="250.32" y1="96.87" x2="-29.34" y2="90.53"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#e251f1"></stop>
+            <stop offset="1" stop-color="#00deff"></stop>
+        </linearGradient>
+        <linearGradient id="linear-gradient-l-2" x1="250.86" y1="73.29" x2="-28.81" y2="66.96"
+                        xlink:href="#linear-gradient-l"></linearGradient>
+        <linearGradient id="linear-gradient-l-3" x1="250.8" y1="75.5" x2="-28.86" y2="69.16"
+                        xlink:href="#linear-gradient-l"></linearGradient>
+        <linearGradient id="linear-gradient-l-4" x1="160.45" y1="83.93" x2="3.45" y2="66.43"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#834ccc"></stop>
+            <stop offset="1" stop-color="#00ebff"></stop>
+        </linearGradient>
+        <linearGradient id="linear-gradient-l-5" x1="160.94" y1="79.55" x2="3.94" y2="62.05"
+                        xlink:href="#linear-gradient-l-4"></linearGradient>
+        <linearGradient id="linear-gradient-l-6" x1="161.92" y1="70.74" x2="4.92" y2="53.24"
+                        xlink:href="#linear-gradient-l-4"></linearGradient>
+    </defs>
+    <g>
+        <g>
+            <path d="M34.8 132l-10.5-10.6C16.19 108.07-1.07 74.67.05 51.17c0 0 9.67 3.67 13.5 6.5 0 0 1.5 45.69 21.25 74.33z"
+                  fill="url(#linear-gradient-l)"></path>
+            <path d="M110.28 132s-5.47-65.9 9.52-100.85l25.5-8.5 19-13.25s-37 48-44.5 121.75z"
+                  fill="url(#linear-gradient-l-2)"></path>
+            <path d="M56.08 130.62s-12-50.06-6.4-84.26l8.37-26.19 13.23-8.27s-9.41 73.27-5.2 114.27z"
+                  fill="url(#linear-gradient-l-3)"></path>
+            <path style="opacity:.5"
+                  d="M34.8 132l-10.5-10.6C16.19 108.07-1.07 74.67.05 51.17c0 0 9.67 3.67 13.5 6.5 0 0 1.5 45.69 21.25 74.33zM110.28 132s-5.47-65.9 9.52-100.85l25.5-8.5 19-13.25s-37 48-44.5 121.75zM56.08 130.62s-12-50.06-6.4-84.26l8.37-26.19 13.23-8.27s-9.41 73.27-5.2 114.27z"></path>
+            <path d="M24.3 121.42s-16-49.89 5-98.75c24-11.45 42-10.77 42-10.77C47 44.57 35.42 76.38 34.8 132c0 0-4.8-3-10.5-10.58z"
+                  fill="url(#linear-gradient-l-4)"></path>
+            <path d="M56.08 130.62s-.17-59 60.72-124.95c11.4-4.09 38-.5 47.5 3.75-92.44 68.89-95.22 132.83-95.22 132.83s-9.59-4.1-13-11.63z"
+                  fill="url(#linear-gradient-l-5)"></path>
+            <path d="M110.28 132S131.12 39.82 235.86 0c4.78 14.84 2.21 31.74-2.89 49.5-93.33 29.67-111.83 95.67-111.83 95.67s-7.67-6.59-10.86-13.17z"
+                  fill="url(#linear-gradient-l-6)"></path>
+        </g>
+    </g>
+</svg>
