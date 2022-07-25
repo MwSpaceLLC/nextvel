@@ -1,4 +1,6 @@
-## [nextvel] Getting Started
+## [nextvel] Getting Started 😁
+
+#### [Database ORM](https://www.prisma.io/), [Iron session](https://github.com/vvo/iron-session), [Nodemailer](https://nodemailer.com/about/)
 
 First rename .env.example to .env & configure your environment:
 
