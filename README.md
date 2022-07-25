@@ -1,6 +1,6 @@
 ## [nextvel] Getting Started 😁
 
-#### [Database ORM](https://www.prisma.io/), [Iron session](https://github.com/vvo/iron-session), [Nodemailer](https://nodemailer.com/about/)
+#### [Database ORM](https://www.prisma.io/), [Iron session](https://github.com/vvo/iron-session), [Nodemailer](https://nodemailer.com/about/),[Tailwind css](https://tailwindcss.com/),
 
 First rename .env.example to .env & configure your environment:
 
