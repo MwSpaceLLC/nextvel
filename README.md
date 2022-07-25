@@ -4,6 +4,12 @@
 
 First rename .env.example to .env & configure your environment:
 
+```bash
+git clone git@github.com:MwSpaceLLC/nextvel.git awesome.it
+```
+
+First rename .env.example to .env & configure your environment:
+
 ```dotenv
 DATABASE_URL="mysql://root:toor@localhost:3306/database"
 ```
@@ -11,7 +17,7 @@ DATABASE_URL="mysql://root:toor@localhost:3306/database"
 1) Run the development migration & install dataset as default:
 
 ```bash
-npx prisma migrate dev && npm run seed
+npx prisma migrate dev && npm run seed admin
 ```
 
 2) Run development server:
