@@ -1,11 +1,34 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const yargs = require('yargs/yargs')
-const {hideBin} = require('yargs/helpers')
+const bcrypt = require("bcryptjs");
+const app = require("../../config/app");
+const {prisma} = require("../../app/helpers/database");
 
-const argv = yargs(hideBin(process.argv)).argv
-const filename = `${__dirname}/models/${argv._[0]}.js`;
+/**
+ |--------------------------------------------------------------------------
+ | Welcome to seeder file
+ |--------------------------------------------------------------------------
+ |
+ | The following file prepare your system for migrate and create
+ | default data in to a database;
+ |
+ */
+(async () => {
 
-// check if exists file name
-if (fs.existsSync(filename)) require(filename)
+    /*
+     |--------------------------------------------------------------------------
+     | Create Admin User
+     |-------------------------------------------------------------------------*/
+    console.log("\n======= Create Admin User =======")
+    console.log(
+        await prisma.admin.create({
+            data: {
+                role: 'root',
+                name: 'Nextvel',
+                email: 'info@nextvel.com',
+                password: bcrypt.hashSync('nextvel', app.salt),
+            }
+        })
+    )
+
+})()
