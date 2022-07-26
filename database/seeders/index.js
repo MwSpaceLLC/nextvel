@@ -1,8 +1,16 @@
 #!/usr/bin/env node
 
-const bcrypt = require("bcryptjs");
+const {PrismaClient} = require('@prisma/client');
 const app = require("../../config/app");
-const {prisma} = require("../../app/helpers/database");
+const bcrypt = require("bcryptjs");
+const prisma = new PrismaClient({
+    log: [
+        'query',
+        'info',
+        'warn',
+        'error'
+    ],
+});
 
 /**
  |--------------------------------------------------------------------------
