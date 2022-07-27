@@ -13,7 +13,15 @@ import AuthenticateMail from "../../../../resources/views/emails/AuthenticateMai
  */
 export default withApiSession(async (req, res) => {
 
-    if (app.token !== req.query.token || req.method !== 'POST') return res.status("403").json();
+    // validate post, token, email & input
+    if (
+        app.token !== req.query.token ||
+        req.method !== 'POST' ||
+        !req.body.email ||
+        !/\S+@\S+\.\S+/.test(req.body.email)
+    ) {
+        return res.status("403").json()
+    }
 
     /*
      | Logic apis
