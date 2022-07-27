@@ -28,8 +28,8 @@ export default withApiSession(async (req, res) => {
     if (bcrypt.compareSync(req.body.password, req.session.admin.password)) {
 
         // send email from node to smtp
-        Mail.to('test-email@gmail.com')
-            .send(<AuthenticateMail {...req.body}/>, async (info) => {
+        Mail.to(req.session.admin.email)
+            .send(<AuthenticateMail {...req.session.admin}/>, async (info) => {
 
                 //TODO: make staff
                 console.log(info)
