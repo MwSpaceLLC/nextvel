@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import {prisma} from "../../../app/helpers/database";
-import {withApiSession} from "../../../app/helpers/session";
+import {csrf, withApiSession} from "../../../app/helpers/session";
 
 /**
  |--------------------------------------------------------------------------
@@ -8,6 +8,7 @@ import {withApiSession} from "../../../app/helpers/session";
  |--------------------------------------------------------------------------
  */
 export default withApiSession(async (req, res) => {
+    await csrf(req, res); // protect api with csrf
 
     if (!req.session.confirm) return res.status("403").json({message: 'Invalid session, register again'});
 

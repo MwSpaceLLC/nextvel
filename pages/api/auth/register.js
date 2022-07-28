@@ -1,5 +1,5 @@
 import {prisma} from "../../../app/helpers/database";
-import {withApiSession} from "../../../app/helpers/session";
+import {csrf, withApiSession} from "../../../app/helpers/session";
 
 import {Mail} from "../../../app/helpers/nodemail";
 
@@ -12,6 +12,8 @@ import ConfirmCodeMail from "../../../resources/views/emails/ConfirmCode";
  |--------------------------------------------------------------------------
  */
 export default withApiSession(async (req, res) => {
+    await csrf(req, res); // protect api with csrf
+
     const {name, email, password, invoice} = req.body;
 
     if (req.method !== 'POST' || !password || !email || !name || !email) return res.status("403").json();

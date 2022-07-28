@@ -1,13 +1,5 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-// import {prisma} from "../../../lib/database";
-// import ReactDOMServer from "react-dom/server";
-// import nodemail from "../../../lib/nodemail";
-// import ResetPassword from "../../../emails/ResetPassword";
-// import {generateToken} from "../../../lib/function";
-
 import {prisma} from "../../../../app/helpers/database";
-import {generateToken, withApiSession} from "../../../../app/helpers/session";
+import {csrf, generateToken, withApiSession} from "../../../../app/helpers/session";
 
 import {Mail} from "../../../../app/helpers/nodemail";
 import ResetPassword from "../../../../resources/views/emails/ResetPassword";
@@ -18,6 +10,7 @@ import ResetPassword from "../../../../resources/views/emails/ResetPassword";
  |--------------------------------------------------------------------------
  */
 export default async function handler(req, res) {
+    await csrf(req, res); // protect api with csrf
 
     const {email} = req.body;
 

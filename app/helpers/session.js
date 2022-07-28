@@ -1,6 +1,7 @@
 import {withIronSessionApiRoute, withIronSessionSsr} from "iron-session/next";
 import crypto from "crypto";
 import moment from "moment";
+import csurf from "csurf";
 
 const sessionOptions = {
     cookieName: process.env.NEXT_PUBLIC_APP_NAME,
@@ -32,3 +33,10 @@ export function withSession(handler) {
 export const generateToken = (replace) => (crypto.randomUUID() + crypto.randomUUID() + crypto.randomUUID()).replace(/-/g, replace ?? '')
 
 export const tokenIsExpired = (token, minutes = 5) => moment(token.createdAt).add(minutes, 'minutes').valueOf() < moment().valueOf()
+
+export const csrf = (req, res) => new Promise((resolve, reject) => {
+    return csurf({cookie: true})(req, res, (error, res) => {
+        if (error) reject(error);
+        return resolve(res);
+    });
+});

@@ -20,7 +20,7 @@ export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Login() {
+export default function Login({csrfToken}) {
 
     const api = useApi();
     const router = useRouter()
@@ -44,8 +44,8 @@ export default function Login() {
 
         axios.post(api, credentials)
             .then(() => router.push('/dashboard'))
-                .catch(({response}) => setRes(response))
-                .finally(() => setLoad(false))
+            .catch(({response}) => setRes(response))
+            .finally(() => setLoad(false))
 
     }
 
@@ -87,6 +87,9 @@ export default function Login() {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="py-8 px-4 sm:px-10">
                         <form className="space-y-6" onSubmit={Submit} method="POST">
+
+                            <input type="hidden" name="_csrf" value={csrfToken}/>
+
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     e-mail address

@@ -1,10 +1,11 @@
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {createSessionId, withSession} from "../../helpers/session";
+import {createSessionId, csrf, withSession} from "../../helpers/session";
 import {prisma} from "../../helpers/database";
 import app from "../../../config/app";
 
 export const getServerSideProps = withSession(
     async function getServerSideProps({query, req, locale}) {
+        await csrf(req); // generate csrf
 
         await createSessionId(req.session);
 
@@ -19,6 +20,7 @@ export const getServerSideProps = withSession(
         return {
             props: {
                 token: query.token,
+                csrfToken: req.csrfToken(),
                 ...(await serverSideTranslations(locale, ['common'])),
             },
         };
