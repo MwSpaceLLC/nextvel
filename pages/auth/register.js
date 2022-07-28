@@ -20,7 +20,7 @@ export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Register() {
+export default function Register({csrfToken}) {
 
     const api = useApi();
     const router = useRouter()
@@ -85,6 +85,8 @@ export default function Register() {
 
                         <div className="mt-6">
                             <form onSubmit={Submit} method="POST" className="space-y-6">
+                                <input type="hidden" name="_csrf" value={csrfToken}/>
+
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                         Your full name

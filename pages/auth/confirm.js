@@ -21,7 +21,7 @@ export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Confirm() {
+export default function Confirm({csrfToken}) {
 
     const api = useApi();
     const router = useRouter()
@@ -79,6 +79,8 @@ export default function Confirm() {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="py-8 px-4 sm:px-10">
                         <form className="space-y-6" onSubmit={Submit} method="POST">
+                            <input type="hidden" name="_csrf" value={csrfToken}/>
+
                             <div>
                                 <label htmlFor="number" className="block text-sm font-medium text-gray-700">
                                     6 digit code

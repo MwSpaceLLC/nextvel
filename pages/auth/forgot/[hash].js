@@ -21,7 +21,7 @@ export {getServerSideProps} from "../../../app/http/middleware/ForgotServerSideP
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function ForgotIndex() {
+export default function ForgotIndex({csrfToken}) {
 
     const api = useApi();
 
@@ -85,6 +85,8 @@ export default function ForgotIndex() {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="py-8 px-4 sm:px-10">
                         <form className="space-y-6" onSubmit={Submit} method="POST">
+                            <input type="hidden" name="_csrf" value={csrfToken}/>
+
                             <div className="space-y-1">
                                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                     Nuova password
