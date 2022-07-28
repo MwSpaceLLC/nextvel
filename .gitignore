@@ -8,9 +8,6 @@ package-lock.json
 
 /node_packages
 
-# ignore migrations datascheme
-/database/migrations
-
 # dependencies
 /node_modules
 /.pnp
