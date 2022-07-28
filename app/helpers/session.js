@@ -1,5 +1,6 @@
 import {withIronSessionApiRoute, withIronSessionSsr} from "iron-session/next";
 import crypto from "crypto";
+import moment from "moment";
 
 const sessionOptions = {
     cookieName: process.env.NEXT_PUBLIC_APP_NAME,
@@ -27,3 +28,7 @@ export function withApiSession(handler) {
 export function withSession(handler) {
     return withIronSessionSsr(handler, sessionOptions);
 }
+
+export const generateToken = (replace) => (crypto.randomUUID() + crypto.randomUUID() + crypto.randomUUID()).replace(/-/g, replace ?? '')
+
+export const tokenIsExpired = (token, minutes = 5) => moment(token.createdAt).add(minutes, 'minutes').valueOf() < moment().valueOf()

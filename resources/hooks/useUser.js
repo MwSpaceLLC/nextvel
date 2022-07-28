@@ -4,7 +4,7 @@ import {fetcher} from "../functions/helpers";
 
 export default function useUser() {
 
-    const {data, error} = useSWR('/api/user', fetcher)
+    const {data, error} = useSWR('/api/auth/user', fetcher)
 
     return [
         data, // user
