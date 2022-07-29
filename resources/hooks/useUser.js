@@ -7,7 +7,7 @@ export default function useUser() {
     const {data, error} = useSWR('/api/auth/user', fetcher)
 
     return [
-        data, // user
+        data || {}, // user
         !error && !!data, // loggedIn
     ]
 }
