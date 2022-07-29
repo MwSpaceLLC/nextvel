@@ -27,7 +27,7 @@ export default function nodemail(to, subject, html, callback) {
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="supported-color-schemes" content="light">
             <meta name="color-scheme" content="light">
-            <title>${`wogha <${process.env.MAIL_FROM_ADDRESS}>`}</title>
+            <title>${process.env.MAIL_FROM_ADDRESS}</title>
             <style>
               @media only screen and (max-width: 600px) {
                 .inner-body {
