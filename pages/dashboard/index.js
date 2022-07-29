@@ -20,7 +20,7 @@ export default function Dashboard() {
     return (
         <AppLayout title={user?.name}>
             <div>
-                Ciao <i>{user?.name}</i> ! | <b><a href="/api/auth/logout">Logout</a></b>
+                Ciao <i>{user?.name}</i> ! | <b><a href="/uth/logout">Logout</a></b>
             </div>
         </AppLayout>
     )
