@@ -6,6 +6,7 @@ import axios from "axios";
 
 import ErrorsAlert from "../../../resources/components/layout/ErrorsAlert";
 import useApi from "../../../resources/hooks/useApi";
+import SuccessAlert from "../../../resources/components/layout/SuccessAlert";
 
 /**
  |--------------------------------------------------------------------------
@@ -107,13 +108,10 @@ export default function Forgot({csrfToken}) {
 
                         </form>
 
-                        {sent && (
-                            <i className="text-green-500 flex items-center justify-center w-full py-2">reset inviato per
-                                e-mail</i>
-                        )}
-
                     </div>
                 </div>
+
+                <SuccessAlert show={sent} onClose={() => setSent(false)}/>
 
                 <ErrorsAlert onClose={e => setRes({})} res={res}/>
 

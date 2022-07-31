@@ -1,15 +1,12 @@
 import {XIcon} from '@heroicons/react/outline'
 
-export default function ErrorsAlert({res, onClose}) {
+export default function SuccessAlert({show = false, onClose, text, }) {
 
-    return !res.status ? <></> : (
-        <div className="absolute z-50 top-5 right-5 rounded bg-red-600">
+    return !show ? <></> : (
+        <div className="absolute z-50 top-5 right-5 rounded bg-green-600">
             <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
                 <div className="pr-16 sm:text-center sm:px-16">
-                    <p className="font-medium text-white">
-                        <span
-                            className="hidden md:inline"><b>{res.status}</b> | {res.data?.message || res.statusText}</span>
-                    </p>
+                    <p className="font-medium text-white">{text}</p>
                 </div>
                 <div className="absolute inset-y-0 right-0 pt-1 pr-1 flex items-start sm:pt-1 sm:pr-2 sm:items-start">
                     <button
