@@ -1,8 +1,6 @@
 import styles from '../resources/styles/Page.module.css'
 
 import {useTranslation} from "next-i18next";
-import Head from 'next/head'
-import Image from 'next/image'
 import AppLayout from "../resources/components/layout/AppLayout";
 
 /**

@@ -1,11 +1,10 @@
+import useUser from "../../resources/hooks/useUser";
+import AppLayout from "../../resources/components/layout/AppLayout";
+
 /**
  |--------------------------------------------------------------------------
  | Export default Middleware |
  |----------------------------------------------------------------------- */
-
-import useUser from "../../resources/hooks/useUser";
-import AppLayout from "../../resources/components/layout/AppLayout";
-
 export {getServerSideProps} from "../../app/http/middleware/AuthServerSideProps"
 
 /**
