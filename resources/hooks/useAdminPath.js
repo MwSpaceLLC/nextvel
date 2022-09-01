@@ -1,5 +1,9 @@
 import {useEffect, useState} from "react";
 
+/**
+ *
+ * @returns {string}
+ */
 export default function useAdminPath() {
 
     const [location, setLocation] = useState(`/admin`);
