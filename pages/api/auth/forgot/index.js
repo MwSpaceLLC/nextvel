@@ -1,5 +1,5 @@
 import {prisma} from "../../../../app/helpers/database";
-import {csrf, generateToken, withApiSession} from "../../../../app/helpers/session";
+import {generateToken, withApiSession} from "../../../../app/helpers/session";
 
 import {Mail} from "../../../../app/helpers/nodemail";
 import ResetPassword from "../../../../resources/views/emails/ResetPassword";
@@ -49,6 +49,6 @@ export default async function handler(req, res) {
 
             //TODO: make staff
             console.log(info)
-            return res.status(200).json()
+            return res.status(200).json({message: 'Reset sent by email'})
         })
 }

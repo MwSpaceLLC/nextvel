@@ -1,4 +1,4 @@
-import {csrf, withApiSession} from "../../../app/helpers/session";
+import {withApiSession} from "../../../app/helpers/session";
 
 /**
  |--------------------------------------------------------------------------

@@ -2,6 +2,7 @@ import styles from '../resources/styles/Page.module.css'
 
 import {useTranslation} from "next-i18next";
 import AppLayout from "../resources/components/layout/AppLayout";
+import useUser from "../resources/hooks/useUser";
 
 /**
  |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ export {getServerSideProps} from "../app/http/middleware/PublicServerSideProps"
 export default function Index() {
 
     const {t} = useTranslation();
+    const [user, loggedIn] = useUser();
 
     return (
         <AppLayout title={t('seo-index-description')} description={t('seo-index-description')}>
@@ -31,13 +33,21 @@ export default function Index() {
 
                 | or |
 
-                <a href="/auth/login" className={styles.code}>[login]</a>
+                {loggedIn ? (
+                    <>
+                        <a href="/dashboard" className={styles.code}>[dashboard]</a>
+                    </>
+                ) : (
+                    <>
+                        <a href="/auth/login" className={styles.code}>[login]</a>
 
-                /
-                <a href="/auth/register" className={styles.code}>[register]</a>
+                        /
+                        <a href="/auth/register" className={styles.code}>[register]</a>
 
-                /
-                <a href="/auth/forgot" className={styles.code}>[forgot]</a>
+                        /
+                        <a href="/auth/forgot" className={styles.code}>[forgot]</a>
+                    </>
+                )}
             </p>
 
             <div className={styles.grid}>

@@ -1,5 +1,5 @@
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {createSessionId, csrf, withSession} from "../../helpers/session";
+import {createSessionId, withSession} from "../../helpers/session";
 import {prisma} from "../../helpers/database";
 import app from "../../../config/app";
 

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import {prisma} from "../../../app/helpers/database";
-import {csrf, withApiSession} from "../../../app/helpers/session";
+import {withApiSession} from "../../../app/helpers/session";
 
 /**
  |--------------------------------------------------------------------------

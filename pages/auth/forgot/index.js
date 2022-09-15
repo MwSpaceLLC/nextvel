@@ -110,7 +110,7 @@ export default function Forgot({csrfToken}) {
                     </div>
                 </div>
 
-                <SuccessAlert show={sent} onClose={() => setSent(false)}/>
+                <SuccessAlert text="e-mail per il ripristino inviata" show={sent} onClose={() => setSent(false)}/>
 
                 <ErrorsAlert onClose={e => setRes({})} res={res}/>
 

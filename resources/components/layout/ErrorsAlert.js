@@ -8,7 +8,7 @@ export default function ErrorsAlert({res, onClose}) {
                 <div className="pr-16 sm:text-center sm:px-16">
                     <p className="font-medium text-white">
                         <span
-                            className="hidden md:inline"><b>{res.status}</b> | {res.data?.message || res.statusText}</span>
+                            className="hidden md:inline"><b>{res.status}</b> | {res.message || res.data?.message || res.statusText}</span>
                     </p>
                 </div>
                 <div className="absolute inset-y-0 right-0 pt-1 pr-1 flex items-start sm:pt-1 sm:pr-2 sm:items-start">

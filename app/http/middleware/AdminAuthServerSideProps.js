@@ -1,7 +1,7 @@
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 import {prisma} from "../../helpers/database";
-import {createSessionId, csrf, withSession} from "../../helpers/session";
+import {createSessionId, withSession} from "../../helpers/session";
 import app from "../../../config/app";
 
 export const getServerSideProps = withSession(
