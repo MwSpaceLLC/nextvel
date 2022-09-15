@@ -10,7 +10,6 @@ import ResetPassword from "../../../../resources/views/emails/ResetPassword";
  |--------------------------------------------------------------------------
  */
 export default async function handler(req, res) {
-    await csrf(req, res); // protect api with csrf
 
     const {email} = req.body;
 

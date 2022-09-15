@@ -35,8 +35,19 @@ export const generateToken = (replace) => (crypto.randomUUID() + crypto.randomUU
 export const tokenIsExpired = (token, minutes = 5) => moment(token.createdAt).add(minutes, 'minutes').valueOf() < moment().valueOf()
 
 export const csrf = (req, res) => new Promise((resolve, reject) => {
-    return csurf({cookie: true})(req, res, (error, res) => {
-        if (error) reject(error);
-        return resolve(res);
-    });
+
+    //todo: https://github.com/expressjs/csurf
+    // This npm module is currently deprecated due to the large influx
+    // of security vulunerability reports received, most of which are
+    // simply exploiting the underlying limitations of CSRF itself.
+    // The Express.js project does not have the resources to put into this module,
+    // which is largely unnecessary for modern SPA-based applications.
+
+    // return csurf({cookie: true})(req, res, (error, res) => {
+    //     if (error) reject(error);
+    //     return resolve(res);
+    // });
+
+    return resolve(res);
+
 });

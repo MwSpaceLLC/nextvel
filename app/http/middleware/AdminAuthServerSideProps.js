@@ -7,7 +7,6 @@ import app from "../../../config/app";
 export const getServerSideProps = withSession(
     async function getServerSideProps({query, req, res, locale}) {
 
-        await csrf(req); // generate csrf
         await createSessionId(req.session);
 
         const admin = await prisma.admin.findUnique({where: {id: req.session?.admin?.id || 0}});
@@ -21,7 +20,6 @@ export const getServerSideProps = withSession(
             props: {
                 admin: admin,
                 token: query.token,
-                csrfToken: req.csrfToken(),
                 ...(await serverSideTranslations(locale, ['common']))
             },
         };

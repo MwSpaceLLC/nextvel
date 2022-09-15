@@ -5,7 +5,6 @@ import {prisma} from "../../helpers/database";
 export const getServerSideProps = withSession(
     async function getServerSideProps({req, locale}) {
 
-        await csrf(req); // generate csrf
         await createSessionId(req.session);
 
         // check with sql query
@@ -15,7 +14,6 @@ export const getServerSideProps = withSession(
 
         return {
             props: {
-                csrfToken: req.csrfToken(),
                 ...(await serverSideTranslations(locale, ['common'])),
             },
         };

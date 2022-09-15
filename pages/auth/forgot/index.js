@@ -81,7 +81,6 @@ export default function Forgot({csrfToken}) {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="py-8 px-4 sm:px-10">
                         <form className="space-y-6" onSubmit={Submit} method="POST">
-                            <input type="hidden" name="_csrf" value={csrfToken}/>
 
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">

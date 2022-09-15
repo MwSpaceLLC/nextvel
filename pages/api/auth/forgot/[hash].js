@@ -8,7 +8,6 @@ import {prisma} from "../../../../app/helpers/database";
  |--------------------------------------------------------------------------
  */
 export default withApiSession(async (req, res) => {
-    await csrf(req, res); // protect api with csrf
 
     const {hash} = req.query;
 
