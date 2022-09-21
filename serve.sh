@@ -16,5 +16,5 @@ npm run build # build nextjs schema
 npx prisma migrate deploy #try to migrate updates
 
 pm2 delete "${nextname,,}"
-pm2 start npm --name "${nextname,,}" -- start -- -p "$1"
+pm2 start npm --name "${nextname,,}" -- start -- -p 3000
 pm2 save

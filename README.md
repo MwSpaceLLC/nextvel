@@ -28,7 +28,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-3) Deploy Helpers: install nginx, node, mariadb & pm2. After you can compile like as below (declare port for proxypass):
+3) Deploy Helpers: install nginx, node, mariadb & pm2. After you can serve project like as below (declare port for
+   proxypass):
+
+> !! important, set port in serve.sh file
 
 ```bash
 cd /var/www/{your_next_folder}
