@@ -15,6 +15,7 @@ export default async function handler(req, res) {
 
     // todo: check your url dynamic or static?
 
+
     // get all records
     const urls = [];
 
