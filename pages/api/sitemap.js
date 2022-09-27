@@ -11,10 +11,7 @@ export default async function handler(req, res) {
     // Instructing the Vercel edge to cache the file
     res.setHeader('Cache-control', 'stale-while-revalidate, s-maxage=3600')
 
-    console.log(req.headers)
-
     // todo: check your url dynamic or static?
-
 
     // get all records
     const urls = [];
