@@ -1,11 +1,12 @@
 import useUser from "../../resources/hooks/useUser";
 import AppLayout from "../../resources/components/layout/AppLayout";
+import Link from "next/link";
 
 /**
  |--------------------------------------------------------------------------
  | Export default Middleware |
  |----------------------------------------------------------------------- */
-export {getServerSideProps} from "../../app/http/middleware/AuthServerSideProps"
+export {getServerSideProps} from "../../http/middleware/AuthServerSideProps"
 
 /**
  |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ export default function Dashboard() {
     return (
         <AppLayout title={user?.name}>
             <div>
-                Ciao <i>{user?.name}</i> ! | <b><a href="/uth/logout">Logout</a></b>
+                Ciao <i>{user?.name}</i> ! | <b><Link href="/auth/logout">Logout</Link></b>
             </div>
         </AppLayout>
     )

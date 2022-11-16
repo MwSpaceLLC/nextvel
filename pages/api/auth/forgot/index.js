@@ -1,8 +1,8 @@
-import {prisma} from "../../../../app/helpers/database";
-import {generateToken, withApiSession} from "../../../../app/helpers/session";
+import {prisma} from "../../../../helpers/database";
+import {generateToken, withApiSession} from "../../../../helpers/session";
 
-import {Mail} from "../../../../app/helpers/nodemail";
-import ResetPassword from "../../../../resources/views/emails/ResetPassword";
+import {Mail} from "../../../../helpers/nodemail";
+import ResetPassword from "../../../../resources/emails/ResetPassword";
 
 /**
  |--------------------------------------------------------------------------
@@ -43,12 +43,10 @@ export default async function handler(req, res) {
 
     const link = `${req.headers.origin}/auth/forgot/${token}`;
 
-    // send email from node to smtp
-    Mail.to(email, 'Richiesta reset della password | ' + user.name)
-        .send(<ResetPassword email={email} link={link}/>, async (info) => {
+    // send email async from node to smtp
+    const {accepted} = await Mail.to(email, 'Richiesta reset della password | ' + user.name).send(
+        <ResetPassword email={email} link={link}/>
+    )
 
-            //TODO: make staff
-            console.log(info)
-            return res.status(200).json({message: 'Reset sent by email'})
-        })
+    return res.status(200).json({message: accepted ? 'Reset inviato via e-mail' : 'Errore invio e-mail, riprova più tardi'})
 }

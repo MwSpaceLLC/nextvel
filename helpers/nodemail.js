@@ -65,13 +65,9 @@ export class Mail {
         return self;
     }
 
-    send(Component, callback, error) {
+    async send(Component) {
         const html = ReactDOMServer.renderToString(Component);
 
-        nodemail(this._to, this._subject, html, async function (err, info) {
-
-            if (err) throw new Error(err)
-            return callback(info);
-        })
+        return await nodemail(this._to, this._subject, html)
     }
 }

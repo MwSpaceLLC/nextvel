@@ -14,7 +14,7 @@ import useApi from "../../resources/hooks/useApi";
  | Export default Middleware |
  |----------------------------------------------------------------------- */
 
-export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps"
+export {getServerSideProps} from "../../http/middleware/GuestServerSideProps"
 
 /**
  |--------------------------------------------------------------------------
@@ -61,17 +61,15 @@ export default function Confirm({}) {
 
                     <h2 className="mt-6 flex items-center gap-2 text-center justify-center text-3xl font-extrabold text-gray-900">
                         <Link href="/">
-                            <a>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-app" fill="none"
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor" strokeWidth={2}>
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                          d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/>
-                                </svg>
-                            </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-app" fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/>
+                            </svg>
                         </Link>
 
-                        Confirm your code
+                        Conferma il tuo codice
                     </h2>
 
                 </div>
@@ -82,7 +80,7 @@ export default function Confirm({}) {
 
                             <div>
                                 <label htmlFor="number" className="block text-sm font-medium text-gray-700">
-                                    6 digit code
+                                    codice a 6 cifre
                                 </label>
                                 <div className="mt-1">
                                     <input
@@ -99,7 +97,7 @@ export default function Confirm({}) {
                                     disabled={load}
                                     type="submit"
                                     className={(load ? 'animate-pulse' : '') + " w-full flex justify-center py-2 px-4 border border-transparent rounded shadow-sm text-sm font-medium text-white bg-app hover:bg-app focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-app"}>
-                                    {load ? '⚪⚪⚪' : 'Confirm Code'}
+                                    {load ? '⚪⚪⚪' : 'Conferma codice'}
                                 </button>
                             </div>
                         </form>

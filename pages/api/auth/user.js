@@ -1,5 +1,5 @@
-import {prisma} from "../../../app/helpers/database";
-import {withApiSession} from "../../../app/helpers/session";
+import {prisma} from "../../../helpers/database";
+import {withApiSession} from "../../../helpers/session";
 
 /**
  |--------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 import styles from "../../styles/Page.module.css";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  |--------------------------------------------------------------------------
@@ -25,9 +26,9 @@ export default function AppLayout({title, description, children}) {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Powered by {' '}
+                    Powered by
                     <div className={styles.logo}>
-                        <Image src="/logo.svg" alt="Logo" width={72} height={16}/>
+                        <Image src="/logo.svg" alt="Logo" width={30} height={30}/>
                     </div>
                 </a>
             </footer>

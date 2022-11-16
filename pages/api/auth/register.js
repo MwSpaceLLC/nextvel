@@ -1,9 +1,10 @@
-import {prisma} from "../../../app/helpers/database";
-import {withApiSession} from "../../../app/helpers/session";
+import {prisma} from "../../../helpers/database";
+import {withApiSession} from "../../../helpers/session";
 
-import {Mail} from "../../../app/helpers/nodemail";
+import {Mail} from "../../../helpers/nodemail";
 
-import ConfirmCodeMail from "../../../resources/views/emails/ConfirmCode";
+import ConfirmCodeMail from "../../../resources/emails/ConfirmCode";
+import ResetPassword from "../../../resources/emails/ResetPassword";
 
 
 /**
@@ -25,18 +26,15 @@ export default withApiSession(async (req, res) => {
 
     // check if user already taken in to a DATABASE
     if (await prisma.user.findUnique({where: {email: email}})) {
-        return sendResponse("indirizzo email già preso", 403)
+        return sendResponse("indirizzo email non disponibile", 403)
     }
 
-    // send email from node to smtp
-    Mail.to(req.session.confirm.email, 'Confirm your code from essebipi.eu')
-        .send(<ConfirmCodeMail {...req.session.confirm}/>, async (info) => {
+    // send email async from node to smtp
+    const {accepted} = await Mail.to(email, 'Conferma il tuo codice').send(
+        <ConfirmCodeMail {...req.session.confirm}/>
+    )
 
-            //TODO: make staff
-            console.log(info)
+    await req.session.save();
+    return res.status(accepted ? 200 : 500).json()
 
-            //save user session
-            await req.session.save();
-            return res.status(200).json()
-        })
 });

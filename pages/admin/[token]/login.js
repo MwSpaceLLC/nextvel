@@ -13,7 +13,7 @@ import ErrorsAlert from "../../../resources/components/layout/ErrorsAlert";
  |----------------------------------------------------------------------- */
 
 // This is middleware for index
-export {getServerSideProps} from "../../../app/http/middleware/AdminGuestServerSideProps"
+export {getServerSideProps} from "../../../http/middleware/AdminGuestServerSideProps"
 
 /**
  |--------------------------------------------------------------------------

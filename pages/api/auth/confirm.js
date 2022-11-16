@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import {prisma} from "../../../app/helpers/database";
-import {withApiSession} from "../../../app/helpers/session";
+import {prisma} from "../../../helpers/database";
+import {withApiSession} from "../../../helpers/session";
 
 /**
  |--------------------------------------------------------------------------
@@ -9,14 +9,14 @@ import {withApiSession} from "../../../app/helpers/session";
  */
 export default withApiSession(async (req, res) => {
 
-    if (!req.session.confirm) return res.status("403").json({message: 'Invalid session, register again'});
+    if (!req.session.confirm) return res.status("403").json({message: 'Sessione non valida, registrati di nuovo'});
 
     const {email, password, name, number} = req.session.confirm;
 
-    if (req.method !== 'POST' || !password || !email || !name || !req.body.number) return res.status("403").json({message: 'Code not exists in request'});
+    if (req.method !== 'POST' || !password || !email || !name || !req.body.number) return res.status("403").json({message: 'Il codice non esiste nella richiesta'});
 
     if (req.session.confirm.random !== parseInt(req.body.number)) {
-        return res.status("422").json({message: 'Invalid code'})
+        return res.status("422").json({message: 'Codice non valido'})
     }
 
     // make password hash

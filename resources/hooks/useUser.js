@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 
-import {fetcher} from "../functions/helpers";
+import {fetcher} from "../functions";
 
 export default function useUser() {
 

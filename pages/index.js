@@ -3,6 +3,7 @@ import styles from '../resources/styles/Page.module.css'
 import {useTranslation} from "next-i18next";
 import AppLayout from "../resources/components/layout/AppLayout";
 import useUser from "../resources/hooks/useUser";
+import Link from "next/link";
 
 /**
  |--------------------------------------------------------------------------
@@ -10,7 +11,7 @@ import useUser from "../resources/hooks/useUser";
  |----------------------------------------------------------------------- */
 
 // This is middleware for index
-export {getServerSideProps} from "../app/http/middleware/PublicServerSideProps"
+export {getServerSideProps} from "../http/middleware/PublicServerSideProps"
 
 /**
  |--------------------------------------------------------------------------
@@ -34,18 +35,16 @@ export default function Index() {
                 | or |
 
                 {loggedIn ? (
-                    <>
-                        <a href="/dashboard" className={styles.code}>[dashboard]</a>
-                    </>
+                    <Link href="/dashboard" className={styles.code}>[dashboard]</Link>
                 ) : (
                     <>
-                        <a href="/auth/login" className={styles.code}>[login]</a>
+                        <Link href="/auth/login" className={styles.code}>[login]</Link>
 
                         /
-                        <a href="/auth/register" className={styles.code}>[register]</a>
+                        <Link href="/auth/register" className={styles.code}>[register]</Link>
 
                         /
-                        <a href="/auth/forgot" className={styles.code}>[forgot]</a>
+                        <Link href="/auth/forgot" className={styles.code}>[forgot]</Link>
                     </>
                 )}
             </p>

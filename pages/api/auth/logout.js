@@ -1,4 +1,4 @@
-import {withApiSession} from "../../../app/helpers/session";
+import {withApiSession} from "../../../helpers/session";
 
 /**
  |--------------------------------------------------------------------------

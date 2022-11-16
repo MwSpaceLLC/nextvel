@@ -1,10 +1,11 @@
-import {withApiSession} from "../../../../app/helpers/session";
+import {withApiSession} from "../../../../helpers/session";
 import app from "../../../../config/app";
 import bcrypt from "bcryptjs";
-import {prisma} from "../../../../app/helpers/database";
-import {Mail} from "../../../../app/helpers/nodemail";
+import {prisma} from "../../../../helpers/database";
+import {Mail} from "../../../../helpers/nodemail";
 
-import AuthenticateMail from "../../../../resources/views/emails/AuthenticateMail";
+import AuthenticateMail from "../../../../resources/emails/AuthenticateMail";
+import ResetPassword from "../../../../resources/emails/ResetPassword";
 
 /**
  |--------------------------------------------------------------------------
@@ -35,17 +36,13 @@ export default withApiSession(async (req, res) => {
     // check if password match
     if (bcrypt.compareSync(req.body.password, req.session.admin.password)) {
 
-        // send email from node to smtp
-        Mail.to(req.session.admin.email)
-            .send(<AuthenticateMail {...req.session.admin}/>, async (info) => {
+        // send email async from node to smtp
+        Mail.to(req.session.admin.email, 'Login Alert').send(
+            <AuthenticateMail {...req.session.admin}/>
+        ).then()
 
-                //TODO: make staff
-                console.log(info)
-
-                //save user session
-                await req.session.save();
-                return res.status(200).json()
-            })
+        await req.session.save();
+        return res.status(200).json()
 
     } else {
 

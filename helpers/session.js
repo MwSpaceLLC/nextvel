@@ -1,7 +1,6 @@
 import {withIronSessionApiRoute, withIronSessionSsr} from "iron-session/next";
 import crypto from "crypto";
 import moment from "moment";
-import csurf from "csurf";
 
 const sessionOptions = {
     cookieName: process.env.NEXT_PUBLIC_APP_NAME,

@@ -1,4 +1,4 @@
-import BodyEmail from "../../components/email/BodyEmail";
+import BodyEmail from "../components/email/BodyEmail";
 
 export default function AuthenticateMail({email}) {
     return (

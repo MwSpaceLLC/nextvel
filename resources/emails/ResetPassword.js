@@ -1,4 +1,4 @@
-import BodyEmail from "../../components/email/BodyEmail";
+import BodyEmail from "../components/email/BodyEmail";
 
 export default function ResetPassword({email, link}) {
     return (
@@ -29,7 +29,7 @@ export default function ResetPassword({email, link}) {
                         lineHeight: '1.5em',
                         marginTop: 0,
                         textAlign: 'left'
-                    }}> You have requested a password reset for: {email}</p>
+                    }}> Hai richiesto la reimpostazione della password per: {email}</p>
                     <table className="action" align="center" width="100%" cellPadding={0}
                            cellSpacing={0} role="presentation" style={{
                         boxSizing: 'border-box',

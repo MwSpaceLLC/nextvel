@@ -1,4 +1,4 @@
-import BodyEmail from "../../components/email/BodyEmail";
+import BodyEmail from "../components/email/BodyEmail";
 
 export default function ConfirmCodeMail({email, random}) {
     return (
@@ -32,7 +32,7 @@ export default function ConfirmCodeMail({email, random}) {
                         marginTop: 0,
                         textAlign: 'left'
                     }}>
-                        Here is your confirmation code: <i>{random}</i>
+                        Ecco il tuo codice di conferma: <i>{random}</i>
                     </p>
 
                 </td>

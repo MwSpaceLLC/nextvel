@@ -7,13 +7,14 @@ import {useRouter} from 'next/router'
 import ErrorsAlert from "../../resources/components/layout/ErrorsAlert";
 
 import useApi from "../../resources/hooks/useApi";
+import Link from "next/link";
 
 /**
  |--------------------------------------------------------------------------
  | Export default Middleware |
  |----------------------------------------------------------------------- */
 
-export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps"
+export {getServerSideProps} from "../../http/middleware/GuestServerSideProps"
 
 /**
  |--------------------------------------------------------------------------
@@ -72,12 +73,12 @@ export default function Register({}) {
                             src="/logo.svg"
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Register for free today!</h2>
+                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Registrati gratuitamente oggi!</h2>
                         <p className="mt-2 text-sm text-gray-600">
-                            Or{' '}
-                            <a href="/auth/login" className="font-medium text-app hover:text-app">
-                                Log in in your account
-                            </a>
+                            Oppure{' '}
+                            <Link href="/auth/login" className="font-medium text-app hover:text-app">
+                                Accedi al tuo account
+                            </Link>
                         </p>
                     </div>
 
@@ -88,7 +89,7 @@ export default function Register({}) {
 
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        Your full name
+                                        Il tuo nome completo
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -102,7 +103,7 @@ export default function Register({}) {
 
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        Email address
+                                        Indirizzo e-mail
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -130,7 +131,7 @@ export default function Register({}) {
 
                                 <div className="space-y-1">
                                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                        Confirm Password
+                                        Conferma Password
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -147,7 +148,7 @@ export default function Register({}) {
                                         type="submit"
                                         className="w-full flex justify-center py-2 px-4 border border-transparent rounded shadow-sm text-sm font-medium text-white bg-app hover:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-app"
                                     >
-                                        {load ? '⚪⚪⚪' : 'Register your self'}
+                                        {load ? '⚪⚪⚪' : 'Registrati'}
                                     </button>
                                 </div>
                             </form>

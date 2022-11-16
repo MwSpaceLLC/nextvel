@@ -9,7 +9,7 @@ import Image from "next/image";
  |----------------------------------------------------------------------- */
 
 // This is middleware for index
-export {getServerSideProps} from "../../../app/http/middleware/AdminAuthServerSideProps"
+export {getServerSideProps} from "../../../http/middleware/AdminAuthServerSideProps"
 
 /**
  |--------------------------------------------------------------------------
