@@ -21,7 +21,7 @@ export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Confirm({csrfToken}) {
+export default function Confirm({}) {
 
     const api = useApi();
     const router = useRouter()

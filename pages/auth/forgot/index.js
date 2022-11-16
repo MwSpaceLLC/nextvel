@@ -20,7 +20,7 @@ export {getServerSideProps} from "../../../app/http/middleware/GuestServerSidePr
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Forgot({csrfToken}) {
+export default function Forgot({}) {
 
     const api = useApi();
 

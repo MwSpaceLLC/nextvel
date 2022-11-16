@@ -21,7 +21,7 @@ export {getServerSideProps} from "../../../app/http/middleware/ForgotServerSideP
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Reset({csrfToken}) {
+export default function Reset({}) {
 
     const api = useApi();
 

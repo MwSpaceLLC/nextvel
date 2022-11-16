@@ -20,7 +20,7 @@ export {getServerSideProps} from "../../app/http/middleware/GuestServerSideProps
  | Export default React Component
  |--------------------------------------------------------------------------
  */
-export default function Login({csrfToken}) {
+export default function Login({}) {
 
     const api = useApi();
     const router = useRouter()

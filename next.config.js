@@ -9,11 +9,6 @@ const nextConfig = {
         domains: []
     },
 
-    // response limit
-    api: {
-        responseLimit: '4mb'
-    },
-
     // seo sitemap /rewrites
     async rewrites() {
         return [
@@ -22,6 +17,9 @@ const nextConfig = {
                 destination: '/api/sitemap'
             }
         ]
+    },
+    experimental: {
+        appDir: true
     }
 }
 
