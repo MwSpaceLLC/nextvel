@@ -20,7 +20,6 @@ export {getServerSideProps} from "../http/middleware/PublicServerSideProps"
 export default function Index() {
 
     const {t} = useTranslation();
-
     const [user, loggedIn] = useUser();
 
     return (
