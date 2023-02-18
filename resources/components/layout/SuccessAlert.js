@@ -1,4 +1,4 @@
-import {XIcon} from '@heroicons/react/outline'
+import {XMarkIcon} from "@heroicons/react/24/outline";
 
 export default function SuccessAlert({show = false, onClose, text, }) {
 
@@ -15,7 +15,7 @@ export default function SuccessAlert({show = false, onClose, text, }) {
                         className="flex p-2 hover:opacity-50"
                     >
                         <span className="sr-only">Dismiss</span>
-                        <XIcon className="h-6 w-6 text-white" aria-hidden="true"/>
+                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true"/>
                     </button>
                 </div>
             </div>

@@ -1,7 +1,12 @@
-import styles from "../../styles/Page.module.css";
 import Head from "next/head";
-import Image from "next/image";
 import AuthUserWrapper from "./AuthUserWrapper";
+
+import NProgress from 'nprogress'
+import {Router} from "next/router";
+
+Router.onRouteChangeStart = () => NProgress.start()
+Router.onRouteChangeComplete = () => NProgress.done(true)
+Router.onRouteChangeError = () => NProgress.done(true)
 
 /**
  |--------------------------------------------------------------------------
@@ -10,30 +15,15 @@ import AuthUserWrapper from "./AuthUserWrapper";
 export default function AppLayout({title, description, children}) {
     return (
         <AuthUserWrapper>
-            <div className={styles.container}>
-                <Head>
-                    <title>{title}</title>
-                    <meta name="description" content={description}/>
-                    <link rel="icon" href="/favicon.ico"/>
-                </Head>
 
-                <main className={styles.main}>
-                    {children}
-                </main>
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={description}/>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
 
-                <footer className={styles.footer}>
-                    <a
-                        href="https://mwspace.com/it"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Powered by
-                        <div className={styles.logo}>
-                            <Image src="/logo.svg" alt="Logo" width={30} height={30}/>
-                        </div>
-                    </a>
-                </footer>
-            </div>
+            <>{children}</>
+
         </AuthUserWrapper>
     )
 }

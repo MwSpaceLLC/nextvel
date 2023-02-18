@@ -1,5 +1,3 @@
-import {useTranslation} from 'next-i18next';
-
 import {useState} from "react";
 import Link from "next/link";
 
@@ -7,6 +5,9 @@ import {useRouter} from 'next/router'
 import axios from "axios";
 import ErrorsAlert from "../../resources/components/layout/ErrorsAlert";
 import useApi from "../../resources/hooks/useApi";
+import AppLayout from "../../resources/components/layout/AppLayout";
+import useCredentials from "../../resources/hooks/useCredentials";
+import {ChevronLeftIcon} from "@heroicons/react/24/outline";
 
 /**
  |--------------------------------------------------------------------------
@@ -24,34 +25,37 @@ export default function Login({}) {
 
     const api = useApi();
     const router = useRouter()
-    const {t} = useTranslation();
 
     const [load, setLoad] = useState(false);
-    const [res, setRes] = useState({});
+    const [error, setError] = useState({});
 
     /**
      *
      * @param evt
-     * @param credentials
      * @constructor
      */
-    const Submit = (evt, credentials = {}) => {
+    const Submit = async (evt) => {
 
         setLoad(true)
         evt.preventDefault();
 
-        evt.target.querySelectorAll('input').forEach(item => Object.assign(credentials, {[item.name]: item.value}))
+        const credentials = useCredentials(evt.target); // pass target if needed
 
-        axios.post(api, credentials)
-            .then(() => router.push('/dashboard'))
-            .catch(({response}) => setRes(response))
-            .finally(() => setLoad(false))
+        try {
+
+            await axios.post(api, credentials);
+            await router.push('/dashboard');
+
+        } catch ({response}) {
+            setError(response)
+        }
+
+        setLoad(false);
 
     }
 
     return (
-
-        <>
+        <AppLayout>
             <img src="/beams-components.png" className="fixed z-0" alt="bg"/>
 
             <div className="relative z-30 min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -59,13 +63,9 @@ export default function Login({}) {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
 
                     <h2 className="mt-6 flex items-center gap-2 text-center justify-center text-3xl font-extrabold text-gray-900">
+
                         <Link href="/">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-app" fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                      d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/>
-                            </svg>
+                            <ChevronLeftIcon className="h-6 w-6 text-app"/>
                         </Link>
 
                         Accedi al tuo account
@@ -119,7 +119,7 @@ export default function Login({}) {
                                 <div className="flex items-center"/>
 
                                 <div className="text-sm">
-                                    {res.status && (
+                                    {error.status && (
                                         <Link href="/auth/forgot">
                                             <span className="font-medium text-app hover:text-app">
                                                 Forgot password?
@@ -142,9 +142,9 @@ export default function Login({}) {
                     </div>
                 </div>
 
-                <ErrorsAlert onClose={e => setRes({})} res={res}/>
+                <ErrorsAlert onClose={e => setError({})} res={error}/>
 
             </div>
-        </>
+        </AppLayout>
     )
 }

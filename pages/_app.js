@@ -1,7 +1,8 @@
 import '../resources/styles/App.global.css'
+import '../resources/styles/Nprogress.css'
 
 import {appWithTranslation} from 'next-i18next';
-import {Provider, useDispatch} from 'react-redux'
+import {Provider} from 'react-redux'
 import store from '../store'
 
 /**
@@ -10,9 +11,11 @@ import store from '../store'
  |----------------------------------------------------------------------- */
 
 export default appWithTranslation(({Component, pageProps}) => {
+
     return (
         <Provider store={store}>
             <Component {...pageProps} />
         </Provider>
     )
+
 });

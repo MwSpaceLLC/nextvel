@@ -7,6 +7,8 @@ import axios from "axios";
 import ErrorsAlert from "../../../resources/components/layout/ErrorsAlert";
 import useApi from "../../../resources/hooks/useApi";
 import SuccessAlert from "../../../resources/components/layout/SuccessAlert";
+import useCredentials from "../../../resources/hooks/useCredentials";
+import {ChevronLeftIcon} from "@heroicons/react/24/outline";
 
 /**
  |--------------------------------------------------------------------------
@@ -27,28 +29,36 @@ export default function Forgot({}) {
     const {t} = useTranslation();
 
     const [load, setLoad] = useState(false);
-    const [res, setRes] = useState({});
+    const [error, setError] = useState({});
 
     const [sent, setSent] = useState(false);
+
 
     /**
      *
      * @param evt
-     * @param credentials
+     * @returns {Promise<void>}
      * @constructor
      */
-    const Submit = (evt, credentials = {}) => {
+    const Submit = async (evt) => {
 
         setLoad(true)
-        setSent(false)
         evt.preventDefault();
 
-        evt.target.querySelectorAll('input').forEach(item => Object.assign(credentials, {[item.name]: item.value}))
+        const credentials = useCredentials(evt.target); // pass target if needed
 
-        axios.post(api, credentials)
-            .then(() => setSent(true))
-            .catch(({response}) => setRes(response))
-            .finally(() => setLoad(false))
+        console.log(credentials)
+
+        try {
+
+            await axios.post(api, credentials);
+            await setSent(true);
+
+        } catch ({response}) {
+            setError(response)
+        }
+
+        setLoad(false);
 
     }
 
@@ -62,13 +72,9 @@ export default function Forgot({}) {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
 
                     <h2 className="mt-6 flex items-center gap-2 text-center justify-center text-3xl font-extrabold text-gray-900">
+
                         <Link href="/">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-app" fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                      d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/>
-                            </svg>
+                            <ChevronLeftIcon className="h-6 w-6 text-app"/>
                         </Link>
 
                         Recupera la tua email
@@ -110,7 +116,7 @@ export default function Forgot({}) {
 
                 <SuccessAlert text="e-mail per il ripristino inviata" show={sent} onClose={() => setSent(false)}/>
 
-                <ErrorsAlert onClose={e => setRes({})} res={res}/>
+                <ErrorsAlert onClose={e => setError({})} res={error}/>
 
             </div>
         </>
