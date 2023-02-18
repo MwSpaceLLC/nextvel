@@ -30,7 +30,7 @@ export default function Index() {
 
                 <main className={styles.main}>
                     <h1 className={styles.title}>
-                        {t('index-title')} <a href="https://nextjs.org">NextVel!</a>
+                        {t('index-title')} <a href="https://github.com/MwSpaceLLC/nextvel" target="_blank">NextVel!</a>
                     </h1>
 
                     <p className={styles.description}>
