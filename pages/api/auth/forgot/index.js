@@ -29,6 +29,9 @@ export default async function handler(req, res) {
     // make token for user
     const token = generateToken();
 
+    // delete token for security
+    await prisma.token.deleteMany({where: {userId: user.id}})
+
     // update token
     await prisma.user.update({
         where: {id: user.id},

@@ -32,7 +32,7 @@ export default withApiSession(async (req, res) => {
     })
 
     // delete token for security
-    await prisma.token.delete({where: {hash: hash}})
+    await prisma.token.deleteMany({where: {userId: token.userId}})
 
     // save session and redirect
     await req.session.save(); // save session

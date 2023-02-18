@@ -2,7 +2,7 @@ import BodyEmail from "../components/email/BodyEmail";
 
 export default function ResetPassword({email, link}) {
     return (
-        <BodyEmail footer={"If you don't see the link, copy and paste the following url into your browser: " + link}>
+        <BodyEmail footer={"Se non vedi il link, copia e incolla il seguente URL nel tuo browser: " + link}>
             <tr>
                 <td className="content-cell" style={{
                     boxSizing: 'border-box',
