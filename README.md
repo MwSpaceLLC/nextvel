@@ -2,6 +2,8 @@
 
 #### [Database ORM](https://www.prisma.io/), [Iron session](https://github.com/vvo/iron-session), [Nodemailer](https://nodemailer.com/about/),[Tailwind css](https://tailwindcss.com/),
 
+![image](https://user-images.githubusercontent.com/29952045/219878519-7816fa18-3d5d-4e3e-b17d-5d725c667999.png)
+
 Download project with git pull:
 
 ```bash
