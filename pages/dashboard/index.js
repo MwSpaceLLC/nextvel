@@ -20,13 +20,17 @@ export default function Dashboard() {
 
     return (
         <AppLayout title={user?.name}>
-            <div className="w-full flex items-center justify-center h-screen text-2xl gap-2">
+
+            <img src="/beams-components.png" className="fixed z-0" alt="bg"/>
+
+            <div className="relative z-30 w-full flex items-center justify-center h-screen text-2xl gap-2">
+
 
                 <Link href="/">
                     <ChevronLeftIcon className="h-6 w-6 text-app"/>
                 </Link>
 
-                Ciao <i>{user?.name}</i> ! | <b className="bg-gray-50 p-1"><Link href="/auth/logout">[Logout]</Link></b>
+                Ciao <i>{user?.name}</i> ! | <b><Link href="/auth/logout">[Logout]</Link></b>
             </div>
         </AppLayout>
     )
