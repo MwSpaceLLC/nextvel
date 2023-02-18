@@ -4,7 +4,7 @@ import {createSessionId, withSession} from "../../helpers/session";
 export const getServerSideProps = withSession(
     async function getServerSideProps({req, locale}) {
 
-        console.log(req.session)
+        await createSessionId(req.session);
 
         //TODO: make stuff
 

@@ -1,10 +1,12 @@
 import {withIronSessionApiRoute, withIronSessionSsr} from "iron-session/next";
-import {getIronSession} from "iron-session";
 
 import crypto from "crypto";
 import moment from "moment";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
+/**
+ *
+ * @type {{password, cookieName, cookieOptions: {maxAge: number, secure: boolean}}}
+ */
 const sessionOptions = {
     cookieName: process.env.NEXT_PUBLIC_APP_NAME,
     password: process.env.COOKIES_PASSWORD,
@@ -12,10 +14,16 @@ const sessionOptions = {
     cookieOptions: {
         maxAge: 60 * 60 * 24, // 1 days
         secure: process.env.NODE_ENV === "production",
-    },
+    }
 };
 
+/**
+ *
+ * @param session
+ * @returns {Promise<string>}
+ */
 export async function createSessionId(session) {
+
     if (!session.id) {
         session.id = crypto.randomUUID();
         await session.save();
@@ -23,15 +31,6 @@ export async function createSessionId(session) {
 
     return session.id;
 }
-
-// export async function getServerSidePropsWrapper(handler) {
-//
-//     await createSessionId(req.session);
-//
-//     //TODO: make stuff
-//
-//     return handler
-// }
 
 export function withApiSession(handler) {
     return withIronSessionApiRoute(handler, sessionOptions);
