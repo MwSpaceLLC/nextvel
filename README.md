@@ -2,7 +2,7 @@
 
 #### [Database ORM](https://www.prisma.io/), [Iron session](https://github.com/vvo/iron-session), [Nodemailer](https://nodemailer.com/about/),[Tailwind css](https://tailwindcss.com/),
 
-First rename .env.example to .env & configure your environment:
+Download project with git pull:
 
 ```bash
 git clone git@github.com:MwSpaceLLC/nextvel.git awesome.it
@@ -31,12 +31,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 3) Deploy Helpers: install nginx, node, mariadb & pm2. After you can serve project like as below (declare port for
    proxypass):
 
-> !! important, set port in serve.sh file
-
 ```bash
-cd /var/www/{your_next_folder}
-
-bash serve.sh # <= this file is in root dir
+bash update.sh # <= this file is in root dir
 ```
 
 ## Learn More
@@ -45,6 +41,8 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [PM2](https://pm2.keymetrics.io/) - PM2 is a daemon process manager.
+- [MwSpace](https://www.mwspace.com/it/supporto) - MwSpace support.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions
 are welcome!
