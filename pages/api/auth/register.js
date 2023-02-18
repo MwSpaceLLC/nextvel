@@ -4,7 +4,6 @@ import {withApiSession} from "../../../helpers/session";
 import {Mail} from "../../../helpers/nodemail";
 
 import ConfirmCodeMail from "../../../resources/emails/ConfirmCode";
-import ResetPassword from "../../../resources/emails/ResetPassword";
 
 
 /**

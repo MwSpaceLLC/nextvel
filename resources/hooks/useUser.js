@@ -1,13 +1,18 @@
-import useSWR from 'swr'
+import {useSelector} from "react-redux";
 
-import {fetcher} from "../functions";
-
+/**
+ *
+ * @returns {unknown[]}
+ */
 export default function useUser() {
 
-    const {data, error} = useSWR('/api/auth/user', fetcher)
+    const {auth} = useSelector((state) => state.user)
+
+    // const [user, setUser] = useState(auth)
+    // useEffect(() => setUser(auth), [auth])
 
     return [
-        data || {}, // user
-        !error && !!data, // loggedIn
+        auth || {}, // user
+        !!auth.id, // loggedIn
     ]
 }

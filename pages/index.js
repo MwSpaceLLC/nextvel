@@ -2,8 +2,8 @@ import styles from '../resources/styles/Page.module.css'
 
 import {useTranslation} from "next-i18next";
 import AppLayout from "../resources/components/layout/AppLayout";
-import useUser from "../resources/hooks/useUser";
 import Link from "next/link";
+import useUser from "../resources/hooks/useUser";
 
 /**
  |--------------------------------------------------------------------------
@@ -19,11 +19,11 @@ export {getServerSideProps} from "../http/middleware/PublicServerSideProps"
  |----------------------------------------------------------------------- */
 export default function Index() {
 
-    const {t} = useTranslation();
     const [user, loggedIn] = useUser();
+    const {t} = useTranslation();
 
     return (
-        <AppLayout title={t('seo-index-description')} description={t('seo-index-description')}>
+        <AppLayout title={t('seo-index-title')} description={t('seo-index-description')}>
             <h1 className={styles.title}>
                 {t('index-title')} <a href="https://nextjs.org">NextVel!</a>
             </h1>

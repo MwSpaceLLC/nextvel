@@ -1,6 +1,6 @@
 {
   "seo-index-title": "Nextjs Starter | Authentication, Seeders, Command, Session, Email, Translation & Database",
-  "seo-index-description": "First rename .env.example to .env & configure your environment & run the development migration & install dataset as default",
+  "seo-index-description": "Start by editing pages/index.js| or |[login]/[register]/[forgot]",
   "index-title": "Welcome to",
   "index-description": "Get started by editing"
 }

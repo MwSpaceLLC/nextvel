@@ -1,6 +1,8 @@
 import '../resources/styles/App.global.css'
 
 import {appWithTranslation} from 'next-i18next';
+import {Provider, useDispatch} from 'react-redux'
+import store from '../store'
 
 /**
  |--------------------------------------------------------------------------
@@ -9,6 +11,8 @@ import {appWithTranslation} from 'next-i18next';
 
 export default appWithTranslation(({Component, pageProps}) => {
     return (
-        <Component {...pageProps} />
+        <Provider store={store}>
+            <Component {...pageProps} />
+        </Provider>
     )
 });

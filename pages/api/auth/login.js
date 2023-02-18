@@ -24,6 +24,6 @@ export default withApiSession(async (req, res) => {
         return res.status(200).json()
     }
 
-    return res.status(403).json({message: 'Le credenziali non corrispondono ai nostri registri'})
+    return res.status(403).json({message: 'Le credenziali non corrispondono'})
 
 });

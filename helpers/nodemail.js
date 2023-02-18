@@ -1,6 +1,10 @@
 const ReactDOMServer = require('react-dom/server');
 const nodemailer = require('nodemailer')
 
+/**
+ *
+ * @type {Mail}
+ */
 const transporter = nodemailer.createTransport({
     port: process.env.MAIL_PORT,
     host: process.env.MAIL_HOST,
@@ -12,13 +16,45 @@ const transporter = nodemailer.createTransport({
     tls: {rejectUnauthorized: false}
 })
 
-export default function nodemail(to, subject, html, callback) {
+/**
+ * mail class
+ */
+export class Mail {
 
-    return transporter.sendMail({
+    /**
+     *
+     * @param to
+     * @param subject
+     */
+    constructor(to, subject) {
+        this.to = to;
+        this.subject = subject;
+    }
+
+    /**
+     *
+     * @param to
+     * @param subject
+     * @returns {Mail}
+     */
+    static to(to, subject) {
+        return new Mail(to, subject);
+    }
+
+    /**
+     *
+     * @param Component
+     * @returns {Promise<unknown>}
+     */
+    async send(Component) {
+
+        this.html = ReactDOMServer.renderToString(Component);
+
+        return transporter.sendMail({
             from: `${process.env.MAIL_FROM_NAME} <${process.env.MAIL_FROM_ADDRESS}>`,
-            to: to,
-            subject: subject,
-            text: html.replace(/<[^>]*>?/gm, ' '),
+            to: this.to,
+            subject: this.subject,
+            text: this.html.replace(/<[^>]*>?/gm, ' '),
             html: `
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -45,29 +81,9 @@ export default function nodemail(to, subject, html, callback) {
             </style>
           </head>
           <body style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; background-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: 0; padding: 0; width: 100% !important;">
-            ${html}
+            ${this.html}
           </body>
         </html>`
-        },
-        callback
-    )
-}
-
-export class Mail {
-
-    _to;
-    _subject;
-
-    static to(to, subject) {
-        const self = new Mail;
-        self._to = to;
-        self._subject = subject
-        return self;
-    }
-
-    async send(Component) {
-        const html = ReactDOMServer.renderToString(Component);
-
-        return await nodemail(this._to, this._subject, html)
+        })
     }
 }
