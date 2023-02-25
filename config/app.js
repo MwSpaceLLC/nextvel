@@ -11,7 +11,33 @@ module.exports = {
     |
     */
 
-    name: process.env.NEXT_PUBLIC_APP_NAME,
+    name: 'NextVel',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Color
+    |--------------------------------------------------------------------------
+    |
+    | This value is the color of your application. This value is used when the
+    | framework needs to place the application's color in a notification or
+    | any other location as required by the application or its packages.
+    |
+    */
+
+    color: '#7f00be',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Url
+    |--------------------------------------------------------------------------
+    |
+    | This value is the url of your application. This value is used when the
+    | framework needs to place the application's url in a notification or
+    | any other location as required by the application or its packages.
+    |
+    */
+
+    url: process.env.APP_URL,
 
     /*
     |--------------------------------------------------------------------------

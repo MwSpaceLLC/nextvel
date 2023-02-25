@@ -39,4 +39,24 @@ const prisma = new PrismaClient({
         })
     )
 
+    /*
+     |--------------------------------------------------------------------------
+     | Create Config Vars
+     |-------------------------------------------------------------------------*/
+    console.log("\n======= Create Config Vars =======")
+    console.log(
+        await prisma.admin.createMany({
+            data: [
+                {
+                    key: 'name',
+                    value: 'NextVel',
+                },
+                {
+                    key: 'name',
+                    value: 'Nextvel',
+                }
+            ]
+        })
+    )
+
 })()

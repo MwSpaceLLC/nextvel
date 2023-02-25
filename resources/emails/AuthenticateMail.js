@@ -1,39 +1,22 @@
 import BodyEmail from "../components/email/BodyEmail";
+import {name} from "../../config/app";
 
-export default function AuthenticateMail({email}) {
+export default function AuthenticateMail({user}) {
     return (
         <BodyEmail>
             <tr>
-                <td className="content-cell" style={{
-                    boxSizing: 'border-box',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-                    position: 'relative',
-                    maxWidth: '100vw',
-                    padding: '32px'
-                }}>
-
-                    <h1 style={{
-                        boxSizing: 'border-box',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-                        position: 'relative',
-                        color: '#3d4852',
-                        fontSize: '18px',
-                        fontWeight: 'bold',
-                        marginTop: 0,
-                        textAlign: 'left'
-                    }}>Accesso rilevato</h1>
-
-                    <p style={{
-                        boxSizing: 'border-box',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-                        position: 'relative',
-                        fontSize: '16px',
-                        lineHeight: '1.5em',
-                        marginTop: 0,
-                        textAlign: 'left'
-                    }}>
-                        Abbiamo rilevato un accesso al tuo account <i>{email}</i>
+                <td style={{color: '#1a1a1a', lineHeight: '22px'}}>
+                    <p style={{marginBottom: '12px'}}>
+                        Ciao {user?.name},
                     </p>
+
+                    <p style={{marginTop: '20px'}}>
+                        È stato rilevato un accesso su {name}.
+                    </p>
+
+                    <i style={{marginTop: '20px'}}>
+                        {user?.address} | {user?.agent}
+                    </i>
 
                 </td>
             </tr>

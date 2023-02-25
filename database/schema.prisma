@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Config {
+  key       String  @unique @db.VarChar(255)
+  value     String?  @db.VarChar(255)
+}
+
 model Admin {
   id        Int      @id @default(autoincrement())
   name      String?  @db.VarChar(255)

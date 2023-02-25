@@ -2,14 +2,15 @@ import {withIronSessionApiRoute, withIronSessionSsr} from "iron-session/next";
 
 import crypto from "crypto";
 import moment from "moment";
+import {name, token} from "../config/app";
 
 /**
  *
  * @type {{password, cookieName, cookieOptions: {maxAge: number, secure: boolean}}}
  */
 const sessionOptions = {
-    cookieName: process.env.NEXT_PUBLIC_APP_NAME,
-    password: process.env.COOKIES_PASSWORD,
+    cookieName: name,
+    password: token,
     // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
     cookieOptions: {
         maxAge: 60 * 60 * 24, // 1 days

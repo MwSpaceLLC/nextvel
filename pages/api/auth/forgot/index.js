@@ -2,7 +2,7 @@ import {prisma} from "../../../../helpers/database";
 import {generateToken, withApiSession} from "../../../../helpers/session";
 
 import {Mail} from "../../../../helpers/nodemail";
-import ResetPassword from "../../../../resources/emails/ResetPassword";
+import ResetPasswordMail from "../../../../resources/emails/ResetPasswordMail";
 
 /**
  |--------------------------------------------------------------------------
@@ -47,8 +47,8 @@ export default async function handler(req, res) {
     const link = `${req.headers.origin}/auth/forgot/${token}`;
 
     // send email async from node to smtp
-    const {accepted} = await Mail.to(email, 'Richiesta reset della password | ' + user.name).send(
-        <ResetPassword email={email} link={link}/>
+    const {accepted} = await Mail.to(email, `🔑 Istruzioni per reimpostare la password | ${user.name}`).send(
+        <ResetPasswordMail user={user} link={link}/>
     )
 
     return res.status(200).json({message: accepted ? 'Reset inviato via e-mail' : 'Errore invio e-mail, riprova più tardi'})

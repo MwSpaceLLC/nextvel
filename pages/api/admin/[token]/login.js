@@ -25,21 +25,22 @@ export default withApiSession(async (req, res) => {
     }
 
     /*
-     | Logic apis
+     | Logic apis | Admin
      |------------------------------------------------------------------------*/
 
-    req.session.admin = await prisma.admin.findUnique({where: {email: req.body.email}})
+    req.session.user = await prisma.admin.findUnique({where: {email: req.body.email}})
+    req.session.user.address = req.headers["x-forwarded-for"] ? req.headers["x-forwarded-for"].split(/, /)[0] : (req.headers["x-real-ip"] || req.connection.remoteAddress);
+    req.session.user.agent = req.headers["user-agent"];
 
     // admin not found in to a DATABASE
-    if (!req.session.admin) return res.status(403).json({message: 'Indirizzo email non corrisponde'});
+    if (!req.session.user) return res.status(403).json({message: 'Indirizzo email non corrisponde'});
 
     // check if password match
-    if (bcrypt.compareSync(req.body.password, req.session.admin.password)) {
+    if (bcrypt.compareSync(req.body.password, req.session.user.password)) {
 
-        // send email async from node to smtp
-        Mail.to(req.session.admin.email, 'Login Alert').send(
-            <AuthenticateMail {...req.session.admin}/>
-        ).then()
+        Mail // send async email async from node to smtp
+            .to(req.session.user.email, `⚠️Rilevato accesso al tuo account | ${req.session.user.name}`)
+            .send(<AuthenticateMail user={req.session.user}/>).then()
 
         await req.session.save();
         return res.status(200).json()

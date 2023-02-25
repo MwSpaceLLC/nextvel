@@ -1,4 +1,5 @@
-const colors = require('tailwindcss/colors')
+// const colors = require('tailwindcss/colors')
+const {color} = require("./config/app");
 
 module.exports = {
     content: [
@@ -8,7 +9,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                app: "#7f00be",
+                app: color,
             },
         },
     },

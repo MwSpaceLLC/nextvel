@@ -3,7 +3,7 @@ import {withApiSession} from "../../../helpers/session";
 
 import {Mail} from "../../../helpers/nodemail";
 
-import ConfirmCodeMail from "../../../resources/emails/ConfirmCode";
+import ConfirmCodeMail from "../../../resources/emails/ConfirmCodeMail";
 
 
 /**
@@ -29,8 +29,8 @@ export default withApiSession(async (req, res) => {
     }
 
     // send email async from node to smtp
-    const {accepted} = await Mail.to(email, 'Conferma il tuo codice').send(
-        <ConfirmCodeMail {...req.session.confirm}/>
+    const {accepted} = await Mail.to(email, `🔐 Istruzioni per proseguire la registrazione | ${name}`).send(
+        <ConfirmCodeMail user={req.session.confirm}/>
     )
 
     await req.session.save();

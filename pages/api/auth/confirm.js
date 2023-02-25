@@ -1,6 +1,8 @@
 import bcrypt from "bcryptjs";
 import {prisma} from "../../../helpers/database";
 import {withApiSession} from "../../../helpers/session";
+import {Mail} from "../../../helpers/nodemail";
+import RegistrateMail from "../../../resources/emails/RegistrateMail";
 
 /**
  |--------------------------------------------------------------------------
@@ -30,6 +32,10 @@ export default withApiSession(async (req, res) => {
             password: hash,
         }
     })
+
+    Mail // send async email async from node to smtp
+        .to(req.session.user.email, `🎊️ Benvenuto nel tuo nuovo account | ${req.session.user.name}`)
+        .send(<RegistrateMail user={req.session.user}/>).then()
 
     delete req.session.confirm; //delete old confirm
     await req.session.save(); // save session
