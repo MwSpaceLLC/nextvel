@@ -16,11 +16,11 @@ export default withApiSession(async (req, res) => {
     if (req.method !== 'POST' || !password || !email) return res.status("403").json({message: 'Errore nella richiesta, riprova più tardi'});
 
     req.session.user = await prisma.user.findUnique({where: {email: email}})
-    req.session.user.address = req.headers["x-forwarded-for"] ? req.headers["x-forwarded-for"].split(/, /)[0] : (req.headers["x-real-ip"] || req.connection.remoteAddress);
-    req.session.user.agent = req.headers["user-agent"];
 
     // user not found in to a DATABASE
     if (!req.session.user) return res.status(403).json({message: 'Indirizzo e-mail o password errati'});
+    req.session.user.address = req.headers["x-forwarded-for"] ? req.headers["x-forwarded-for"].split(/, /)[0] : (req.headers["x-real-ip"] || req.connection.remoteAddress);
+    req.session.user.agent = req.headers["user-agent"];
 
     if (bcrypt.compareSync(password, req.session.user.password)) {
 
